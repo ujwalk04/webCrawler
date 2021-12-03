@@ -2,6 +2,7 @@ import ssl, socket
 from prettytable import PrettyTable
 import argparse
 import time, json
+import streamlit as st
 
 # def check_ssl():
 parser = argparse.ArgumentParser(description = 'Check and print SSL certiicate details')
@@ -21,7 +22,7 @@ def check_ssl(hostname):
             cert = s.getpeercert()
 
             data = json.dumps(cert, indent=2)
-            print(data)
+            # print(data)
 
             subject = dict(x[0] for x in cert['subject'])
             issued_to = subject['commonName']
@@ -49,9 +50,9 @@ def check_ssl(hostname):
             table.add_row(["caIssuers", cert["caIssuers"][0]])
             table.add_row(["crlDistributionPoints", cert["crlDistributionPoints"][0]])
             table.add_row(["DNS", [dns][0][1:4]])
-            print(table)
+            st.json(data)
             
         except:
-            print('no SSL certiicate enabled!!')
+            st.write('no SSL certiicate enabled!!')
 
 # check_ssl(hostname)

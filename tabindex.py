@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import argparse
+import streamlit as st
 
 parser = argparse.ArgumentParser(description = 'Check for Null tab index')
 parser.add_argument('--link', type=str)
@@ -23,12 +24,12 @@ def check_tab(url):
                 
                 if int(attr)==0:
                     c=1
-                    print("Null Tabindex found at :")
-                    print(tag)
-                    print("\n")
+                    st.write("Null Tabindex found at :")
+                    # print(tag)
+                    # print("\n")
         except:
             continue
     if(c==0):
-        print("No null tabindex found")
+        st.write("No null tabindex found")
 
 # check_tab(url)
