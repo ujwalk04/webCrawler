@@ -35,7 +35,7 @@ then install all the libraries used, mentioned in the 'requirements.txt'
 * Here you can run the program individually for each type of problem
 * Here we have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled) of the website and the info regarding null tab index and the __image tags__ without __alt text__ are displayed in a local URL.
 * We have also used streamlit to display information regarding the cookies present in a website.
-### Install streamlit using the following command
+#### Install streamlit using the following command
 
 ```py
 pip install streamlit 
@@ -43,13 +43,13 @@ pip install streamlit
 
 Specify the url using --link option while executing the script.
 
-### This scriipt displays the ssl details , img tags without alt-text, null tab index.(e.g = https://github.com)
+#### This scriipt displays the ssl details , img tags without alt-text, null tab index.(e.g = https://github.com)
 #### Script 
 ```py
 py -m streamlit run script.py -- --link https://github.com
 ```
 
-### This script shows the details about the cookies present in the site (e.g = https://github.com)
+#### This script shows the details about the cookies present in the site (e.g = https://github.com)
 #### Script
 ```py
 py -m streamlit run cookies.py -- -u https://github.com -f json
