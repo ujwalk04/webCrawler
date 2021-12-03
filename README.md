@@ -19,25 +19,39 @@ then install all the libraries used, mentioned in the 'requirements.txt'
 
 * Note to be taken that you are in the correct directorty before running the program
 * Here you can run the program individually for each type of problem
-#### For SSL-Certificate compilance test:
+* Here we have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled) of the website and the info regarding null tab index and the __image tags__ without __alt text__ are displayed in a local URL.
+
+### Install streamlit using the following command
+
+```py
+pip install streamlit 
+```
+
+Specify the url using --link option while executing the script.
+
+#### Script for streamlit
+```py
+py -m streamlit run script.py -- --link <url>
+```
+<!-- #### For SSL-Certificate compilance test:
 ```
 python3 check.py
 ```
 #### For Cookie- test:
 ```
 python3 cookies.py
-```
+``` -->
 #### For Alt-text :
-Firstly head to the correct directory `cd webCralTf cd webCralTf`(yes twice) then run
+Firstly head to the correct directory `cd .\webCralTF\webCralTF\` (yes twice) then run
 ```
 scrapy crawl spidey
 ```
 #### For color-contast :
 Firstly head to the correct directory then run
 ```
-python3 colContr.py
+python colContr.py
 ```
-#### For tab-Index navigation :
+<!-- #### For tab-Index navigation :
 ```
 python3 tabindex.py
-```
+``` -->

@@ -59,7 +59,7 @@ def readFile(filename, info, nocolor, formatoutput, delay, timeout):
         st.json("[ERR] File not found.")
 
 
-def st.jsonNormal(line, cookies, nocolor, info):
+def stjsonNormal(line, cookies, nocolor, info):
     if nocolor:
         color_blue = white
         color_red = white
@@ -90,7 +90,7 @@ def st.jsonNormal(line, cookies, nocolor, info):
             st.json("\tValue: %s\n\tPath: %s\n\tExpire: %s" % (cookie.value, cookie.path, expires))
 
 
-def st.jsonGrepable(line, cookies, info):
+def stjsonGrepable(line, cookies, info):
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -130,7 +130,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 
-def st.jsonXML(line, cookies, info):
+def stjsonXML(line, cookies, info):
     allxml = ET.Element('url', {'site': line.strip()})
     for cookie in cookies:
         child = ET.SubElement(allxml, 'cookie')
@@ -159,7 +159,7 @@ def st.jsonXML(line, cookies, info):
     ET.dump(allxml)
 
 
-def st.jsonJson(line, cookies, info):
+def stjsonJson(line, cookies, info):
     cookies_output = []
     for cookie in cookies:
         secure = cookie.secure
@@ -193,7 +193,7 @@ def st.jsonJson(line, cookies, info):
     st.json(json.dumps(json_output, indent=4, separators=(',', ': ')))
 
 
-def st.jsonCsv(line, cookies, info):
+def stjsonCsv(line, cookies, info):
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
