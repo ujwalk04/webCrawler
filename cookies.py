@@ -18,7 +18,7 @@ green = "\033[0;32m"
 red = "\033[91m"
 
 def headersURL(line, info, nocolor, formatoutput, delay, timeout):
-    """ page load and print data"""
+    """ page load and st.write data"""
     url = line.strip()
     if (urlparse(url).scheme == ''):
         url = 'http://%s'%url
@@ -28,22 +28,22 @@ def headersURL(line, info, nocolor, formatoutput, delay, timeout):
         if (r.status_code == 302) and (len(r.cookies) == 0):
             r = requests.get(url, verify=False, allow_redirects=True, timeout=timeout)
         if (formatoutput == "normal"):
-            printNormal(line, r.cookies, nocolor, info)
+            st.writeNormal(line, r.cookies, nocolor, info)
         elif (formatoutput == "json"):
-            printJson(line, r.cookies, info)
+            st.writeJson(line, r.cookies, info)
         elif (formatoutput == "xml"):
-            printXML(line, r.cookies, info)
+            st.writeXML(line, r.cookies, info)
         elif (formatoutput == "csv"):
             if info:
-                print("url,cookie name,secure,httponly,value,path,expires")
+                st.write("url,cookie name,secure,httponly,value,path,expires")
             else:
-                print("url,cookie name,secure,httponly")
-            printCsv(line, r.cookies, info)
+                st.write("url,cookie name,secure,httponly")
+            st.writeCsv(line, r.cookies, info)
         elif (formatoutput == "grepable"):
-            printGrepable(line, r.cookies, info)
+            st.writeGrepable(line, r.cookies, info)
     except:
         if (formatoutput == "normal"):
-            print("[ERR] %s - Connection failed." % url)
+            st.write("[ERR] %s - Connection failed." % url)
         else:
             pass
 
@@ -55,10 +55,10 @@ def readFile(filename, info, nocolor, formatoutput, delay, timeout):
             for line in f:
                 headersURL(line, info, nocolor, formatoutput, delay, timeout)
     except FileNotFoundError:
-        print("[ERR] File not found.")
+        st.write("[ERR] File not found.")
 
 
-def printNormal(line, cookies, nocolor, info):
+def st.writeNormal(line, cookies, nocolor, info):
     if nocolor:
         color_blue = white
         color_red = white
@@ -67,7 +67,7 @@ def printNormal(line, cookies, nocolor, info):
         color_blue = blue
         color_red = red
         color_green = green
-    print("%s[*] URL: %s%s"%(color_blue,line.strip(),white))
+    st.write("%s[*] URL: %s%s"%(color_blue,line.strip(),white))
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -80,16 +80,16 @@ def printNormal(line, cookies, nocolor, info):
             secureResult = '%ssecure: %s%s' % (color_red, str(secure), white)
         else:
             secureResult = '%sSecure: %s' % (color_green, str(secure))
-        print("%s[*] Name: %s\n\t%s\n\t%s%s%s" % (white, name, secureResult, white, httponlyResult, white))
+        st.write("%s[*] Name: %s\n\t%s\n\t%s%s%s" % (white, name, secureResult, white, httponlyResult, white))
         if info:
             if cookie.expires is not None:
                 expires = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 expires = "Never"
-            print("\tValue: %s\n\tPath: %s\n\tExpire: %s" % (cookie.value, cookie.path, expires))
+            st.write("\tValue: %s\n\tPath: %s\n\tExpire: %s" % (cookie.value, cookie.path, expires))
 
 
-def printGrepable(line, cookies, info):
+def st.writeGrepable(line, cookies, info):
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -107,13 +107,13 @@ def printGrepable(line, cookies, info):
                 expires = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 expires = "Never"
-            print("URL: %s: Cookie: %s : Secure: %s : Httponly: %s : value: %s : path: %s : expires: %s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
+            st.write("URL: %s: Cookie: %s : Secure: %s : Httponly: %s : value: %s : path: %s : expires: %s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
         else:
-            print("URL: %s: Cookie: %s : Secure: %s : Httponly: %s" % (line.strip(), name, secureResult, httponlyResult))
+            st.write("URL: %s: Cookie: %s : Secure: %s : Httponly: %s" % (line.strip(), name, secureResult, httponlyResult))
 
 
 def indent(elem, level=0):
-    """ XML pretty print"""
+    """ XML pretty st.write"""
     i = "\n" + level * "  "
     if len(elem):
         if not elem.text or not elem.text.strip():
@@ -129,7 +129,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 
-def printXML(line, cookies, info):
+def st.writeXML(line, cookies, info):
     allxml = ET.Element('url', {'site': line.strip()})
     for cookie in cookies:
         child = ET.SubElement(allxml, 'cookie')
@@ -158,7 +158,7 @@ def printXML(line, cookies, info):
     ET.dump(allxml)
 
 
-def printJson(line, cookies, info):
+def st.writeJson(line, cookies, info):
     cookies_output = []
     for cookie in cookies:
         secure = cookie.secure
@@ -189,10 +189,10 @@ def printJson(line, cookies, info):
             'url': line.strip(),
             'cookies': cookies_output
         }
-    print(json.dumps(json_output, indent=4, separators=(',', ': ')))
+    st.write(json.dumps(json_output, indent=4, separators=(',', ': ')))
 
 
-def printCsv(line, cookies, info):
+def st.writeCsv(line, cookies, info):
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -205,15 +205,15 @@ def printCsv(line, cookies, info):
             secureResult = "NO"
         else:
             secureResult = "YES"
-        # If info option entered, print all
+        # If info option entered, st.write all
         if info:
             if cookie.expires is not None:
                 expires = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 expires = "Never"
-            print("%s,\"%s\",%s,%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
+            st.write("%s,\"%s\",%s,%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
         else:
-            print("%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult))
+            st.write("%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult))
 
 
 def googleSearch(domain, info, nocolor, formatoutput, delay, timeout):
@@ -260,7 +260,7 @@ def opciones():
         parser.add_option_group(group)
         (options, args) = parser.parse_args()
         if (len(sys.argv) == 1):
-            parser.print_help()
+            parser.st.write_help()
         elif (options.input is not None):
             readFile(options.input, options.info, options.nocolor, options.format, options.delay, options.timeout)
         elif (options.url is not None):
