@@ -43,14 +43,14 @@ pip install streamlit
 
 Specify the url using --link option while executing the script.
 
-#### This scriipt displays the ssl details , img tags without alt-text, null tab index.(e.g = https://github.com)
-#### Script 
+#### This Script displays the ssl details , img tags without alt-text, null tab index.(e.g = https://github.com)
+#### Run the following command 
 ```py
 py -m streamlit run script.py -- --link https://github.com
 ```
 
 #### This script shows the details about the __cookies__ present in the site (e.g = https://github.com)
-#### Script
+#### Run the following command 
 ```py
 py -m streamlit run cookies.py -- -u https://github.com -f json
 ```
