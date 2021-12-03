@@ -19,15 +19,15 @@ then install all the libraries used, mentioned in the 'requirements.txt'
 
 * Note to be taken that you are in the correct directorty before running the program
 * Here you can run the program individually for each type of problem
-####For SSL-Certificate compilance test:
+#### For SSL-Certificate compilance test:
 ```
 python3 check.py
 ```
-####For Cookie- test:
+#### For Cookie- test:
 ```
 python3 cookies.py
 ```
-####For Alt-text :
+#### For Alt-text :
 Firstly head to the correct directory `cd webCralTf cd webCralTf`(yes twice) then run
 ```
 scrapy crawl spidey
