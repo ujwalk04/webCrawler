@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from optparse import OptionParser, OptionGroup
 from urllib.parse import urlparse
-import sys
 import streamlit as st
+import sys
 import xml.etree.ElementTree as ET
 import requests
 import json
@@ -19,7 +19,7 @@ green = "\033[0;32m"
 red = "\033[91m"
 
 def headersURL(line, info, nocolor, formatoutput, delay, timeout):
-    """ page load and st.json data"""
+    """ page load and print data"""
     url = line.strip()
     if (urlparse(url).scheme == ''):
         url = 'http://%s'%url
@@ -29,22 +29,22 @@ def headersURL(line, info, nocolor, formatoutput, delay, timeout):
         if (r.status_code == 302) and (len(r.cookies) == 0):
             r = requests.get(url, verify=False, allow_redirects=True, timeout=timeout)
         if (formatoutput == "normal"):
-            st.jsonNormal(line, r.cookies, nocolor, info)
+            printNormal(line, r.cookies, nocolor, info)
         elif (formatoutput == "json"):
-            st.jsonJson(line, r.cookies, info)
+            printJson(line, r.cookies, info)
         elif (formatoutput == "xml"):
-            st.jsonXML(line, r.cookies, info)
+            printXML(line, r.cookies, info)
         elif (formatoutput == "csv"):
             if info:
-                st.json("url,cookie name,secure,httponly,value,path,expires")
+                st.write("url,cookie name,secure,httponly,value,path,expires")
             else:
-                st.json("url,cookie name,secure,httponly")
-            st.jsonCsv(line, r.cookies, info)
+                st.write("url,cookie name,secure,httponly")
+            printCsv(line, r.cookies, info)
         elif (formatoutput == "grepable"):
-            st.jsonGrepable(line, r.cookies, info)
+            printGrepable(line, r.cookies, info)
     except:
         if (formatoutput == "normal"):
-            st.json("[ERR] %s - Connection failed." % url)
+            st.write("[ERR] %s - Connection failed." % url)
         else:
             pass
 
@@ -56,10 +56,10 @@ def readFile(filename, info, nocolor, formatoutput, delay, timeout):
             for line in f:
                 headersURL(line, info, nocolor, formatoutput, delay, timeout)
     except FileNotFoundError:
-        st.json("[ERR] File not found.")
+        st.write("[ERR] File not found.")
 
 
-def stjsonNormal(line, cookies, nocolor, info):
+def printNormal(line, cookies, nocolor, info):
     if nocolor:
         color_blue = white
         color_red = white
@@ -68,7 +68,7 @@ def stjsonNormal(line, cookies, nocolor, info):
         color_blue = blue
         color_red = red
         color_green = green
-    st.json("%s[*] URL: %s%s"%(color_blue,line.strip(),white))
+    st.write("%s[*] URL: %s%s"%(color_blue,line.strip(),white))
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -81,16 +81,16 @@ def stjsonNormal(line, cookies, nocolor, info):
             secureResult = '%ssecure: %s%s' % (color_red, str(secure), white)
         else:
             secureResult = '%sSecure: %s' % (color_green, str(secure))
-        st.json("%s[*] Name: %s\n\t%s\n\t%s%s%s" % (white, name, secureResult, white, httponlyResult, white))
+        st.write("%s[*] Name: %s\n\t%s\n\t%s%s%s" % (white, name, secureResult, white, httponlyResult, white))
         if info:
             if cookie.expires is not None:
                 expires = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 expires = "Never"
-            st.json("\tValue: %s\n\tPath: %s\n\tExpire: %s" % (cookie.value, cookie.path, expires))
+            st.write("\tValue: %s\n\tPath: %s\n\tExpire: %s" % (cookie.value, cookie.path, expires))
 
 
-def stjsonGrepable(line, cookies, info):
+def printGrepable(line, cookies, info):
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -108,13 +108,13 @@ def stjsonGrepable(line, cookies, info):
                 expires = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 expires = "Never"
-            st.json("URL: %s: Cookie: %s : Secure: %s : Httponly: %s : value: %s : path: %s : expires: %s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
+            st.write("URL: %s: Cookie: %s : Secure: %s : Httponly: %s : value: %s : path: %s : expires: %s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
         else:
-            st.json("URL: %s: Cookie: %s : Secure: %s : Httponly: %s" % (line.strip(), name, secureResult, httponlyResult))
+            st.write("URL: %s: Cookie: %s : Secure: %s : Httponly: %s" % (line.strip(), name, secureResult, httponlyResult))
 
 
 def indent(elem, level=0):
-    """ XML pretty st.json"""
+    """ XML pretty print"""
     i = "\n" + level * "  "
     if len(elem):
         if not elem.text or not elem.text.strip():
@@ -130,7 +130,7 @@ def indent(elem, level=0):
             elem.tail = i
 
 
-def stjsonXML(line, cookies, info):
+def printXML(line, cookies, info):
     allxml = ET.Element('url', {'site': line.strip()})
     for cookie in cookies:
         child = ET.SubElement(allxml, 'cookie')
@@ -159,7 +159,7 @@ def stjsonXML(line, cookies, info):
     ET.dump(allxml)
 
 
-def stjsonJson(line, cookies, info):
+def printJson(line, cookies, info):
     cookies_output = []
     for cookie in cookies:
         secure = cookie.secure
@@ -193,7 +193,7 @@ def stjsonJson(line, cookies, info):
     st.json(json.dumps(json_output, indent=4, separators=(',', ': ')))
 
 
-def stjsonCsv(line, cookies, info):
+def printCsv(line, cookies, info):
     for cookie in cookies:
         name = cookie.name
         secure = cookie.secure
@@ -206,15 +206,15 @@ def stjsonCsv(line, cookies, info):
             secureResult = "NO"
         else:
             secureResult = "YES"
-        # If info option entered, st.json all
+        # If info option entered, print all
         if info:
             if cookie.expires is not None:
                 expires = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
             else:
                 expires = "Never"
-            st.json("%s,\"%s\",%s,%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
+            st.write("%s,\"%s\",%s,%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult, cookie.value, cookie.path, expires))
         else:
-            st.json("%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult))
+            st.write("%s,\"%s\",%s,%s" % (line.strip(), name, secureResult, httponlyResult))
 
 
 def googleSearch(domain, info, nocolor, formatoutput, delay, timeout):
@@ -261,7 +261,7 @@ def opciones():
         parser.add_option_group(group)
         (options, args) = parser.parse_args()
         if (len(sys.argv) == 1):
-            parser.st.json_help()
+            parser.print_help()
         elif (options.input is not None):
             readFile(options.input, options.info, options.nocolor, options.format, options.delay, options.timeout)
         elif (options.url is not None):
