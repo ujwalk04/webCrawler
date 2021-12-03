@@ -35,7 +35,7 @@ def check_ssl(hostname):
                 index = subject[i]
                 dns.append(index[1])
 
-            print('----------------SSL Certificate Details-------------------')
+            st.write('----------------SSL Certificate Details-------------------')
             table  = PrettyTable(['Fields', 'Values'])
             table.add_row(["version", cert["version"]])
             table.add_row(["commonName", issued_to])

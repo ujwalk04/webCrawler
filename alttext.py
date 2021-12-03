@@ -3,13 +3,13 @@ import requests
 import argparse
 import streamlit as st
 
-parser = argparse.ArgumentParser(description = 'Check for Null tab index')
+parser = argparse.ArgumentParser(description = 'Check for images without Alt text')
 parser.add_argument('--link', type=str)
 args = parser.parse_args()
 url = args.link
 
 def check_alttxt(url):
-
+    st.write('-----------------Images without Alt text reports-----------------')
     html = requests.get(url).content
     c=0
     soup = BeautifulSoup(html, "html.parser")
