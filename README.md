@@ -49,7 +49,7 @@ Specify the url using --link option while executing the script.
 py -m streamlit run script.py -- --link https://github.com
 ```
 
-#### This script shows the details about the __cookies__ present in the site (e.g = https://github.com)
+#### This Script shows the details about the __cookies__ present in the site (e.g = https://github.com)
 #### Run the following command 
 ```py
 py -m streamlit run cookies.py -- -u https://github.com -f json
