@@ -32,12 +32,12 @@ Firstly head to the correct directory `cd webCralTf cd webCralTf`(yes twice) the
 ```
 scrapy crawl spidey
 ```
-####For color-contast :
+#### For color-contast :
 Firstly head to the correct directory then run
 ```
 python3 colContr.py
 ```
-####For tab-Index navigation :
+#### For tab-Index navigation :
 ```
 python3 tabindex.py
 ```
