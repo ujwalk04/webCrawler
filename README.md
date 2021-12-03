@@ -34,7 +34,7 @@ then install all the libraries used, mentioned in the 'requirements.txt'
 * Note to be taken that you are in the correct directorty before running the program
 * Here you can run the program individually for each type of problem
 * Here we have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled) of the website and the info regarding null tab index and the __image tags__ without __alt text__ are displayed in a local URL.
-* We have also used streamlit to display information regarding the cookies present in a website.
+* We have also used streamlit to display information regarding the __cookies__ present in a website.
 #### Install streamlit using the following command
 
 ```py
@@ -49,7 +49,7 @@ Specify the url using --link option while executing the script.
 py -m streamlit run script.py -- --link https://github.com
 ```
 
-#### This script shows the details about the cookies present in the site (e.g = https://github.com)
+#### This script shows the details about the __cookies__ present in the site (e.g = https://github.com)
 #### Script
 ```py
 py -m streamlit run cookies.py -- -u https://github.com -f json
