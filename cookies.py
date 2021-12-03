@@ -219,6 +219,7 @@ def printCsv(line, cookies, info):
 
 def googleSearch(domain, info, nocolor, formatoutput, delay, timeout):
     """ Google search, find subdomains and load pages"""
+    
     g_url = "http://www.google.com/search?hl=es&q=site:%s&btnG=Google+Search" % domain
     r = requests.get(g_url, verify=False, headers=user_agent)
     soup = BeautifulSoup(r.text, "html.parser")
@@ -242,6 +243,7 @@ def googleSearch(domain, info, nocolor, formatoutput, delay, timeout):
 
 
 def opciones():
+        st.write('----------------------Cookie Details------------------------')
         parser = OptionParser("usage: %prog [options] \nExample: ./%prog -i ips.txt")
         parser.add_option("-i", "--input",
                   action="store", type="string", dest="input", help="File input with the list of webservers")
