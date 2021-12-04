@@ -1,6 +1,6 @@
 # WebCrawler
 ***
-
+Submission of Team WR217164
 ## Contributed by:
 ***
 * [Shivam Mishra](https://github.com/7shivamx)
@@ -23,9 +23,8 @@ the cookies on the website, and cookie consent verification links.
    
 ## Approach
 ***
-* Note to be taken that you are in the correct directorty before running the program
-* Here you can run the program individually for each type of problem
-* Here we have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled) of the website and the info regarding null tab index and the __image tags__ without __alt text__ are displayed in a local URL.
+* The user can run the program individually for each type of problem .
+* We have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled) of the website and the info regarding null tab index and the __image tags__ without __alt text__ are displayed in a local URL.
 * We have also used streamlit to display information regarding the __cookies__ present in a website.
 
 ## Libraries used :
