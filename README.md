@@ -34,10 +34,7 @@ prettytable
 streamlit
 beautifulsoup
 requests
-optparse
 urllib
-xml
-datetime
 ```
 ***
 ## Usage
