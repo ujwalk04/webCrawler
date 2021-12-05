@@ -29,13 +29,11 @@ def headersURL(line, info, nocolor, formatoutput, delay, timeout):
         if (r.status_code == 302) and (len(r.cookies) == 0):
             r = requests.get(url, verify=False, allow_redirects=True, timeout=timeout)
         if (formatoutput == "normal"):
-            printNormal(line, r.cookies, nocolor, info)
-        elif (formatoutput == "json"):
             printJson(line, r.cookies, info)
         elif (formatoutput == "xml"):
             printXML(line, r.cookies, info)
         elif (formatoutput == "csv"):
-            if info:
+            if 1:
                 st.write("url,cookie name,secure,httponly,value,path,expires")
             else:
                 st.write("url,cookie name,secure,httponly")
@@ -247,7 +245,7 @@ def opciones():
         parser = OptionParser("usage: %prog [options] \nExample: ./%prog -i ips.txt")
         parser.add_option("-i", "--input",
                   action="store", type="string", dest="input", help="File input with the list of webservers")
-        parser.add_option("-u", "--url",
+        parser.add_option("-l", "--link",
                   action="store", type="string", dest="url", help="URL")
         parser.add_option("-f", "--format",
                   action="store", type="string", dest="format", default="normal", help="Output format (json, xml, csv, normal, grepable)")
@@ -256,7 +254,7 @@ def opciones():
         parser.add_option("--nocolor",
                   action="store_true", dest="nocolor", default=False, help="Disable color output")
         parser.add_option("-n", "--info",
-                  action="store_true", dest="info", default=False, help="More information")
+                  action="store_true", dest="info", default=False, help="Information")
         group = OptionGroup(parser, "Performance")
         group.add_option("-t", type="float", dest="timeout", default=1.0, help="Response Timeout")
         group.add_option("-d", type="float", dest="delay", default=0.0, help="Delay between requests")
