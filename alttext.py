@@ -20,7 +20,8 @@ def check_alttxt(url):
                 continue
         except:
             st.write("No alt text found at :")
-            st.write(tag,"\n")
+            st.write(str(tag))
+            st.write("/n")
             c=c+1
     if(c==0):
         st.write("Every image has an alt text")

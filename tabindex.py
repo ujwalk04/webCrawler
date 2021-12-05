@@ -26,11 +26,9 @@ def check_tab(url):
                 if int(attr)==0:
                     c=1
                     st.write("Null Tabindex found at :")
-                    # print(tag)
-                    # print("\n")
+                    st.write(str(tag))
+                    st.write("\n")
         except:
             continue
     if(c==0):
-        st.write("No null tabindex found")
-
-# check_tab(url)
+         st.write("No null tabindex found")
