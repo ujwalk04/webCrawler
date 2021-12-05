@@ -53,6 +53,6 @@ def check_ssl(hostname):
             st.json(data)
             
         except:
-            st.write('no SSL certiicate enabled!!')
+            st.write('no SSL certificate enabled for this URL!!')
 
 # check_ssl(hostname)
