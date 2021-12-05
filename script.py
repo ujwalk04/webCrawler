@@ -7,13 +7,11 @@ import streamlit as st
 from bs4 import BeautifulSoup
 from optparse import OptionParser, OptionGroup
 from urllib.parse import urlparse
-import streamlit as st
 import sys
 import xml.etree.ElementTree as ET
 import requests
 import json
 import datetime
-import time
 import re
 
 user_agent = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0' }
