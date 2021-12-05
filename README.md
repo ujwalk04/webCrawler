@@ -1,6 +1,6 @@
 # WebCrawler
 
-Submission of Team WR217164
+Submission of Team MA-217164
 ## Contributed by:
 * [Shivam Mishra](https://github.com/7shivamx)
 * [Suryansh](https://github.com/0Suryansh)
@@ -22,8 +22,7 @@ the cookies on the website, and cookie consent verification links.
 ## Approach
 
 * The user can run the program individually for each type of problem .
-* We have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled) of the website and the info regarding null tab index and the __image tags__ without __alt text__ are displayed in a local URL.
-* We have also used streamlit to display information regarding the __cookies__ present in a website.
+* We have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled), __cookies__ present, verification attribute, info regarding __null tab index__ and the __image tags__ without __alt text__ of a website are displayed in a local URL.
 
 ***
 ## Libraries used :
@@ -48,17 +47,13 @@ datetime
 * ```py pip install streamlit ```
 Specify the url using --link option while executing the script.
 
-#### This Script displays the ssl details , img tags without alt-text, null tab index.(e.g = https://github.com)
+#### This Script displays the ssl details, verification & details about the cookies being used by the website, img tags without alt-text and null tab index. (e.g = https://github.com)
+
 #### Run the following command 
 ```py
 py -m streamlit run script.py -- --link https://github.com
 ```
 
-#### This Script shows the details about the __cookies__ present in the site (e.g = https://github.com)
-#### Run the following command 
-```py
-py -m streamlit run cookies.py -- -u https://github.com -f json
-```
 <!-- #### For SSL-Certificate compilance test:
 ```
 python3 check.py
@@ -68,12 +63,12 @@ python3 check.py
 python3 cookies.py
 ``` -->
 #### For Alt-text :
-Firstly head to the correct directory `cd .\webCralTF\webCralTF\` (yes twice) then run
+Firstly head to `cd .\webCralTF\webCralTF\` (yes twice) then run
 ```
 scrapy crawl spidey
 ```
 #### For color-contast :
-Firstly head to the correct directory then run
+Now head to the correct directory then run
 ```
 python colContr.py
 ```
