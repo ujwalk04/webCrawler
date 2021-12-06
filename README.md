@@ -10,18 +10,18 @@ Submission of Team MA-217164
 
 ## Problem Statement
 We had to develop a web crawler which would identify the following key components :
-* **SSL certificate compliance** – Check all links in the site for URL validation of SSL (all
+* __SSL certificate compliance__ – Check all links in the site for URL validation of SSL (all
 hyperlinks should be https://), and verify the validity of the SSL certificate.
-* **Cookie checker** – Verify cookies being used by the website, the cookie checker will scan
+* __Cookie checker__ – Verify cookies being used by the website, the cookie checker will scan
 the cookies on the website, and cookie consent verification links.
-* **ADA compliance**
+* __ADA compliance__
     * Alt text in all images.
     * Color contrast for the site as per w3.org guidelines.
     * Accessibility issues to check the site markup for null tab index
 ***
 ## Approach
 
-* The user can run the program individually for each type of problem .
+* The user can run the program individually for each type of problem. There is also a combined script for all executing all tasks.
 * We have used streamlit to render the results in a web-interface instead of displaying it in the terminal. The __SSL Certificate__ details (if enabled), __cookies__ present, verification attribute, info regarding __null tab index__ and the __image tags__ without __alt text__ of a website are displayed in a local URL.
 
 ***
