@@ -1,6 +1,6 @@
 # WebCrawler
 
-Submission of Team MA-217164
+Submission of Team MA-217164 in Web Crawler competition organised by TechFest , IIT Bombay 
 ## Contributed by:
 * [Shivam Mishra](https://github.com/7shivamx)
 * [Suryansh](https://github.com/0Suryansh)
